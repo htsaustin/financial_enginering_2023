@@ -1,2 +1,2 @@
-# financial_enginering_2023
+# Financial Engineering Course 2023
 Course Homework and materials
