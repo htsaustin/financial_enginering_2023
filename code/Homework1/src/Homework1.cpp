@@ -10,7 +10,7 @@ using namespace std;
 //See formula on slide 34, and here: https://www.linkedin.com/pulse/python-implementation-binomial-stock-option-pricing-sheikh-pancham
 double newtonSymb(int N, int i) {
     if (i <0 || i>N) {
-        return 1;
+        return 0;
     }
 
     double result = 1;
@@ -21,9 +21,26 @@ double newtonSymb(int N, int i) {
     return result;
 }
 
+double summationTerm(double q, int i, int N, double s0, double U, double D, double K) {
+
+    double factorialTerm = newtonSymb(N, i);
+
+    //This looks to be constant?, i.e. independent of i?
+    double qTerm = pow(q, i) * pow((1 -q), (N-i));
+
+    double sTerm = S(s0, U, D, N, i);
+    double payoff = callPayoff(sTerm, K);
+
+    double term = factorialTerm * qTerm * payoff;
+
+    return term;
+}
+
+
 int main() {
 
-    cout << "newtonSymb(5, 3): "<< newtonSymb(5, 3);
+    //Sample terms:
+    //s0 = 100, U = 0.05, D = 0.05, R = 0, N = 5, K = 110
 
 
     //From slide 12/3
@@ -36,7 +53,6 @@ int main() {
 
     //putting into slide 34, eqn 19...
     // q = risk neutral probability
-
 
 
     // Define the in memory location.
@@ -57,8 +73,16 @@ int main() {
     double q = riskNeutralProbability(U, D, R);
     cout << "Risk - neutral probability q = " << q << endl;
 
+    //extract constant rate term: 1 / (1 + R)^N
+    double rateTerm = 1 / pow((1 + R), N);
 
-    //TODO - implement here.
+    double summationValue = 0;
+    for (int j = 0; j < N; j++) {
+        summationValue = summationValue + summationTerm(q, j, N, S0, U, D, K);
+    }
+    double result = rateTerm * summationValue;
+
+    cout << "Result was: "<< result;
 
     return 0;
 }
