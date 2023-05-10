@@ -53,7 +53,7 @@ double EurOption::priceByCRR(BinModel model, double K) {
 
         //For each value i, at this timestep n, calculate the 'risk-neutral' expectation.
         //Overwrite the previous value, we don't need it.
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             price[i] = (q * price[i + 1] + (1-q) * price[i]) / (1 + model.getR());  //Slides, Eqn. (16)
         }
     }

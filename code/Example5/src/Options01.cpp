@@ -38,7 +38,7 @@ double priceByCRR(double S0, double U, double D, double R, int N, double K) {
 
         //For each value i, at this timestep n, calculate the 'risk-neutral' expectation.
         //Overwrite the previous value, we don't need it.
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i <= n; i++) {
             price[i] = (q * price[i+1] + (1-q) * price[i]) / (1 + R);  //Slides, Eqn. (16)
         }
     }
