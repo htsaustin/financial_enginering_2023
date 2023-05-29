@@ -24,20 +24,33 @@ int main() {
     cout << "European call option price = "
          << option1.priceByCRR(model)
          << endl << endl;
+
+    BinLattice<double> callPriceTree;
+    BinLattice<bool> callStoppingTree;
     cout << "American call option price = "
-         << option1.priceBySnell(model)
+         << option1.priceBySnell(model, callPriceTree, callStoppingTree)
          << endl << endl;
+    cout << "American call prices:" << endl << endl;
+    callPriceTree.display();
+    cout << "American call exercise policy:" << endl << endl;
+    callStoppingTree.display();
+
 
     Put option2;
     option2.getInputData();
 
+    BinLattice<double> putPriceTree;
+    BinLattice<bool> putStoppingTree;
     cout << "European put option price = "
          << option2.priceByCRR(model)
          << endl << endl;
     cout << "American put option price = "
-         << option2.priceBySnell(model)
+         << option2.priceBySnell(model, putPriceTree, putStoppingTree)
          << endl << endl;
-
+    cout << "American put prices:" << endl << endl;
+    putPriceTree.display();
+    cout << "American put exercise policy:" << endl << endl;
+    putStoppingTree.display();
 
     return 0;
 }
