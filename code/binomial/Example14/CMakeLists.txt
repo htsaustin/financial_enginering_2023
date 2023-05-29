@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)           # Enable c++17 standard
 file(GLOB SOURCES "src/*.cpp")
 
 
-add_executable(financial_engineering_2023 ${SOURCES} include/BinLattice02.h)
+add_executable(financial_engineering_2023 ${SOURCES})
 
 target_include_directories(financial_engineering_2023
         PRIVATE

@@ -1,8 +1,9 @@
-#ifndef BSModel01
-#define BSModel01
+#ifndef BSModel01_h
+#define BSModel01_h
 
 #include <vector>
 #include <cstdlib>
+#include <stdlib.h>
 #include <ctime>
 using namespace std;
 
@@ -18,10 +19,13 @@ public :
         this -> S0 = S0_;
         this -> r = r_;
         this -> sigma = sigma_;
-        this -> srand(time(NULL));
+
+        //Set random seed
+        srand(time(NULL));
     }
 
-    void GenerateSamplePath(double T, int m, SamplePath &S);
+    //T is total time, and m are the number of observation points
+    void generateSamplePath(double T, int m, SamplePath &S);
 };
 
-#endif
+#endif //BSModel01_h
